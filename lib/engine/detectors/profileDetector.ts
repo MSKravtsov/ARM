@@ -118,7 +118,7 @@ function getConstraints(profile: UserInputProfile): Constraint[] {
                     label: 'At least 1 foreign language through Abitur',
                     category: 'languages',
                     min: 1,
-                    i18nKey: 'report.profile.nrw.languageRequired',
+                    i18nKey: 'report.profileViolations.nrw.languageRequired',
                 },
             ];
 
@@ -144,13 +144,13 @@ function getConstraints(profile: UserInputProfile): Constraint[] {
                     label: 'At least 1 continuous foreign language',
                     category: 'languages',
                     min: 1,
-                    i18nKey: 'report.profile.bavaria.languageRequired',
+                    i18nKey: 'report.profileViolations.bavaria.languageRequired',
                 },
                 {
                     label: 'At least 1 continuous natural science',
                     category: 'sciences',
                     min: 1,
-                    i18nKey: 'report.profile.bavaria.scienceRequired',
+                    i18nKey: 'report.profileViolations.bavaria.scienceRequired',
                 },
             ];
         }
@@ -165,7 +165,7 @@ function getConstraints(profile: UserInputProfile): Constraint[] {
                     label: `At least ${config.minLanguages} active language(s)`,
                     category: 'languages',
                     min: config.minLanguages,
-                    i18nKey: 'report.profile.general.languageRequired',
+                    i18nKey: 'report.profileViolations.general.languageRequired',
                 });
             }
 
@@ -174,7 +174,7 @@ function getConstraints(profile: UserInputProfile): Constraint[] {
                     label: `At least ${config.minSciences} active science(s)`,
                     category: 'sciences',
                     min: config.minSciences,
-                    i18nKey: 'report.profile.general.scienceRequired',
+                    i18nKey: 'report.profileViolations.general.scienceRequired',
                 });
             }
 
@@ -187,7 +187,7 @@ function getConstraints(profile: UserInputProfile): Constraint[] {
                             label: 'Linguistic profile requires ≥2 languages',
                             category: 'languages',
                             min: 2,
-                            i18nKey: 'report.profile.general.linguisticLanguages',
+                            i18nKey: 'report.profileViolations.general.linguisticLanguages',
                         });
                     }
                     break;
@@ -198,7 +198,7 @@ function getConstraints(profile: UserInputProfile): Constraint[] {
                             label: 'Scientific profile requires ≥2 sciences',
                             category: 'sciences',
                             min: 2,
-                            i18nKey: 'report.profile.general.scientificSciences',
+                            i18nKey: 'report.profileViolations.general.scientificSciences',
                         });
                     }
                     break;
@@ -236,7 +236,7 @@ function checkBavariaCoreSubjects(
             trapType: TrapType.ProfileViolation,
             message:
                 'Mathematics is required through Abitur in Bavaria but is not active.',
-            i18nKey: 'report.profile.bavaria.mathRequired',
+            i18nKey: 'report.profileViolations.bavaria.mathRequired',
             i18nParams: {},
             affectedSubjectIds: [],
         });
@@ -248,7 +248,7 @@ function checkBavariaCoreSubjects(
             trapType: TrapType.ProfileViolation,
             message:
                 'German (Deutsch) is required through Abitur in Bavaria but is not active.',
-            i18nKey: 'report.profile.bavaria.germanRequired',
+            i18nKey: 'report.profileViolations.bavaria.germanRequired',
             i18nParams: {},
             affectedSubjectIds: [],
         });
@@ -324,7 +324,7 @@ function simulateDrops(
                     trapType: TrapType.ProfileViolation,
                     message:
                         `"${s.name}" is a keystone subject — dropping it would violate: ${c.label}.`,
-                    i18nKey: 'report.profile.keystoneWarning',
+                    i18nKey: 'report.profileViolations.keystoneWarning',
                     i18nParams: {
                         subjectName: s.name,
                         rule: c.label,
@@ -362,7 +362,7 @@ function checkNrwArtMusic(subjects: Subject[]): RiskFinding[] {
                 trapType: TrapType.ProfileViolation,
                 message:
                     'NRW requires at least one art or music course (Kunst/Musik) in the qualification phase.',
-                i18nKey: 'report.profile.nrw.artMusicRequired',
+                i18nKey: 'report.profileViolations.nrw.artMusicRequired',
                 i18nParams: {},
                 affectedSubjectIds: [],
             },
@@ -430,7 +430,7 @@ export const profileDetector: TrapDetector = {
                 trapType: TrapType.ProfileViolation,
                 message:
                     'Profile structure is intact. All mandatory subject-area requirements are met.',
-                i18nKey: 'report.profile.allClear',
+                i18nKey: 'report.profileViolations.allClear',
                 i18nParams: {
                     languageCount: inventory.languages.length,
                     scienceCount: inventory.sciences.length,

@@ -18,7 +18,7 @@ export enum RiskSeverity {
 
 // ─── Trap Types ─────────────────────────────────────────────
 
-/** The 7 core detector modules. */
+/** The 8 core detector modules (including Module 7: Psychosocial). */
 export enum TrapType {
     ZeroPoint = 'ZeroPoint',
     Deficit = 'Deficit',
@@ -28,6 +28,7 @@ export enum TrapType {
     Volatility = 'Volatility',
     ProfileViolation = 'ProfileViolation',
     Special2026 = 'Special2026',
+    Psychosocial = 'Psychosocial',
 }
 
 // ─── Risk Findings ──────────────────────────────────────────
@@ -64,6 +65,18 @@ export interface SubjectRiskAnnotation {
     contributedPoints: number;
     /** Grade trend across semesters: "improving", "declining", or "stable". */
     trend: 'improving' | 'declining' | 'stable';
+
+    // ── Psychosocial Risk Indicators (Module 7) ──
+    /** Risk multiplier from psychosocial analysis (1.0 = no change, >1.0 = increased urgency). */
+    riskMultiplier?: number;
+    /** True if good grades but low confidence (hidden volatility/burnout risk). */
+    isFragile?: boolean;
+    /** True if borderline grade with anxiety (collapse predictor). */
+    isUnstable?: boolean;
+    /** True if structural barriers detected (health issues, external pressure). */
+    hasStructuralBarriers?: boolean;
+    /** Dominant stress factor type for this subject. */
+    dominantStressType?: 'METHODOLOGICAL' | 'PSYCHOLOGICAL' | 'STRUCTURAL';
 }
 
 // ─── Detector Interface ─────────────────────────────────────

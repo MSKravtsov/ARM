@@ -63,6 +63,25 @@ function countDeficits(subjects: Subject[], threshold: number): number {
 }
 
 /**
+ * Count the number of deficit grades in LK subjects only.
+ * A grade is a deficit when it is non-null and below the given threshold.
+ */
+function countLkDeficits(subjects: Subject[], threshold: number): number {
+    let count = 0;
+    for (const subject of subjects) {
+        if (subject.isActive === false) continue;
+        if (subject.type !== SubjectType.LK) continue; // LK subjects only
+        for (const key of SEMESTER_KEYS) {
+            const grade = subject.semesterGrades[key];
+            if (grade !== null && grade < threshold) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+/**
  * Check whether a student is disqualified (any zero-point grade
  * in a mandatory / belegpflichtig subject, or deficit overflow).
  */
@@ -103,17 +122,18 @@ function seminarMean(subject: Subject): number | null {
 
 // ─── Finding Builders ───────────────────────────────────────
 
-function nrwHighDeficitFinding(totalDeficits: number): RiskFinding {
+function nrwGapYearCriticalFinding(totalDeficits: number, lkDeficits: number): RiskFinding {
     return {
-        severity: RiskSeverity.ORANGE,
+        severity: RiskSeverity.RED,
         trapType: TrapType.Special2026,
-        i18nKey: 'report.special2026.nrw.highDeficits',
+        i18nKey: 'report.special2026.nrw.gapYearCritical',
         message:
-            `Repeat Risk: High (${totalDeficits} deficits). Be aware that repeating ` +
-            `the Q2 year in 2026 is structurally difficult. You may have to change ` +
-            `schools to a 'Bündelungsgymnasium' as your current school may not offer ` +
-            `a Q2 repeat class for G8 students.`,
-        i18nParams: { totalDeficits },
+            `CRITICAL TRANSITION RISK: With ${totalDeficits} total deficits (${lkDeficits} in LK courses), ` +
+            `you are in the danger zone for the 2026 "Gap Year" void. Repeating the year at ` +
+            `this school is likely IMPOSSIBLE due to the G8/G9 transition. Failure may force ` +
+            `a transfer to a centralized 'Bündelungsgymnasium' with limited capacity. Take ` +
+            `immediate action to secure your grades.`,
+        i18nParams: { totalDeficits, lkDeficits },
         affectedSubjectIds: [],
     };
 }
@@ -176,19 +196,21 @@ function evaluateNRW(
     const findings: RiskFinding[] = [];
     const activeSubjects = profile.subjects.filter((s) => s.isActive !== false);
     const totalDeficits = countDeficits(activeSubjects, ruleset.deficitThreshold);
+    const lkDeficits = countLkDeficits(activeSubjects, ruleset.deficitThreshold);
     const disqualified = isStudentDisqualified(
         activeSubjects,
         totalDeficits,
         ruleset.maxDeficits
     );
 
-    // CONDITION 2: Already disqualified → RED (check first, takes precedence)
+    // CONDITION 1: Already disqualified → RED (check first, takes precedence)
     if (disqualified) {
         findings.push(nrwCriticalTransitionFinding());
     }
-    // CONDITION 1: Close to the limit → ORANGE
-    else if (totalDeficits >= NRW_HIGH_DEFICIT_THRESHOLD) {
-        findings.push(nrwHighDeficitFinding(totalDeficits));
+    // CONDITION 2: Gap Year Critical Zone → RED
+    // Trigger: totalDeficits >= 6 OR lkDeficits >= 2
+    else if (totalDeficits >= NRW_HIGH_DEFICIT_THRESHOLD || lkDeficits >= 2) {
+        findings.push(nrwGapYearCriticalFinding(totalDeficits, lkDeficits));
     }
 
     return findings;
@@ -263,6 +285,7 @@ export const special2026Detector: TrapDetector = {
 /** Exposed for unit testing only. */
 export const _internals = {
     countDeficits,
+    countLkDeficits,
     isStudentDisqualified,
     seminarMean,
     evaluateNRW,

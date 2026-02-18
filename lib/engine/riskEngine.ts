@@ -24,6 +24,7 @@ import { examRiskDetector } from './detectors/examRiskDetector';
 import { volatilityDetector } from './detectors/volatilityDetector';
 import { profileDetector } from './detectors/profileDetector';
 import { special2026Detector } from './detectors/special2026Detector';
+import { psychosocialDetector } from './detectors/psychosocialDetector';
 
 // ─── Severity Ordering ──────────────────────────────────────
 
@@ -107,7 +108,7 @@ function mergeAnnotations(
 
 // ─── Main Engine ────────────────────────────────────────────
 
-/** All registered detectors (8 modules). */
+/** All registered detectors (9 modules including Module 7: Psychosocial). */
 const ALL_DETECTORS: TrapDetector[] = [
     zeroPointDetector,
     deficitDetector,
@@ -117,6 +118,7 @@ const ALL_DETECTORS: TrapDetector[] = [
     volatilityDetector,
     profileDetector,
     special2026Detector,
+    psychosocialDetector,
 ];
 
 /**

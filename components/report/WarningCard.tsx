@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { RiskFinding } from '@/types/riskEngine';
 
@@ -12,6 +13,7 @@ interface WarningCardProps {
  * ORANGE-level Warning Card with expandable drill-down details.
  */
 export default function WarningCard({ finding }: WarningCardProps) {
+    const t = useTranslations('report');
     const [expanded, setExpanded] = useState(false);
 
     return (
@@ -44,7 +46,11 @@ export default function WarningCard({ finding }: WarningCardProps) {
                     <p className="font-semibold text-amber-800 text-sm">
                         {finding.trapType.replace(/([A-Z])/g, ' $1').trim()}
                     </p>
-                    <p className="text-amber-700 text-sm mt-0.5">{finding.message}</p>
+                    <p className="text-amber-700 text-sm mt-0.5">
+                        {finding.i18nKey
+                            ? t(finding.i18nKey.replace('report.', ''), finding.i18nParams || {})
+                            : finding.message}
+                    </p>
                 </div>
 
                 {/* Expand chevron */}

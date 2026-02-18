@@ -37,6 +37,8 @@
     "**/*.mts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "superpowers",
+    "project_backup_manual_20260215"
   ]
 }

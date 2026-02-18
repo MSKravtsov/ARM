@@ -1,131 +1,223 @@
 {
-    "landing": {
-        "title": "ABITUR RISK MONITOR",
-        "subtitle": "Strategische Akademische Planung und Risikominderung für die Klasse 2026.",
-        "cta": "Analyse starten",
-        "nav": {
-            "home": "Home",
-            "pricing": "Pricing",
-            "about": "About"
-        }
+  "landing": {
+    "title": "Sichern Sie Ihr Abitur.",
+    "titleHighlight": "Überlassen Sie Ihre Noten nicht dem Zufall.",
+    "subtitle": "Berechnen Sie sofort Ihr Risiko, finden Sie Defizit-Fallen und planen Sie Ihren Weg zum Abschluss. Entwickelt für den Jahrgang 2026.",
+    "cta": "Risiko prüfen",
+    "updatedFor": "Aktualisiert für NRW-Regelungen 2026",
+    "nav": {
+      "home": "Startseite",
+      "pricing": "Preise",
+      "about": "Über uns"
     },
-    "configEngine": {
-        "title": "Konfigurationsmodul",
-        "federalState": "Bundesland",
-        "graduationYear": "Abschlussjahr",
-        "startAnalysis": "Analyse starten",
-        "states": {
-            "nrw": "NRW",
-            "bavaria": "Bayern",
-            "general": "Allgemein"
-        }
-    },
-    "setup": {
-        "title": "Kurswahl & Noten",
-        "subtitle": "Füge deine Fächer hinzu, trage Halbjahresleistungen ein und markiere Prüfungsfächer.",
-        "backToHome": "Zurück zur Startseite",
-        "subjectsTitle": "Deine Fächer",
-        "subjectSingular": "Fach",
-        "subjectPlural": "Fächer",
-        "subjectLabel": "Fach",
-        "addSubject": "Fach hinzufügen",
-        "removeSubject": "Fach entfernen",
-        "subjectName": "Fachname",
-        "subjectNamePlaceholder": "z.B. Mathematik",
-        "subjectType": "Kurstyp",
-        "lkLabel": "Leistungskurs",
-        "gkLabel": "Grundkurs",
-        "mandatory": "Einbringungspflicht",
-        "examSubject": "Abiturprüfungsfach",
-        "examType": "Prüfungsart",
-        "examTypeNone": "Keine",
-        "examTypeWritten": "Schriftlich",
-        "examTypeOral": "Mündlich",
-        "examTypeColloquium": "Kolloquium",
-        "semesterGrades": "Halbjahresleistungen (0–15 Punkte)",
-        "finalExamGrade": "Abiturnote",
-        "confidence": "Zuversicht",
-        "confidenceLow": "Niedrig",
-        "confidenceHigh": "Hoch",
-        "stressFactors": "Stressfaktoren",
-        "rulesConfigTitle": "Eigene Regeln (Allgemeiner Modus)",
-        "rulesConfigDesc": "Definiere deine eigenen Bewertungsregeln, da kein Bundesland-Preset gilt.",
-        "lkWeight": "LK Gewichtung",
-        "gkWeight": "GK Gewichtung",
-        "deficitThreshold": "Unterpunktungsgrenze",
-        "maxDeficits": "Max. erlaubte Unterpunktungen",
-        "minTotalPoints": "Mindestpunktzahl gesamt",
-        "calculateRisk": "Risiko berechnen",
-        "cancel": "Abbrechen",
-        "configStatus": "Konfigurationsstatus",
-        "validationErrors": "Bitte behebe folgende Probleme:",
-        "validationSuccess": "Profil erfolgreich validiert! Bereit zur Risikoberechnung.",
-        "hintNRW": "NRW-Modus: Genau 2 LK-Fächer und 4 Prüfungsfächer erforderlich.",
-        "hintBavaria": "Bayern-Modus: Genau 2 LK-Fächer und 5 Prüfungsfächer erforderlich (3 schriftlich + 2 mündlich/Kolloquium).",
-        "hintGeneral": "Allgemeiner Modus: Keine Beschränkungen bei LK-/Prüfungsfächeranzahl. Konfiguriere deine eigenen Regeln unten.",
-        "semester": "Semester",
-        "examPoints": "Abiturprüfung"
-    },
-    "report": {
-        "title": "Risikobericht",
-        "overallStatus": "Gesamtstatus",
-        "totalPoints": "Gesamtpunktzahl",
-        "deficits": "Unterpunktungen",
-        "zeroPoints": "Null-Punkte-Halbjahre",
-        "keystones": "Pflichtfächer",
-        "riskStatus": "Risikostand",
-        "backToSetup": "Zurück zur Eingabe",
-        "safe": "Sicher",
-        "warning": "Warnung",
-        "danger": "Gefahr",
-        "red": "Kritisch",
-        "orange": "Warnung",
-        "green": "Sicher",
-        "hardStops": "Harte Sperren — Gesetzliche Disqualifikation",
-        "structuralRisks": "Strukturelle Risiken",
-        "optimizations": "Optimierungsmöglichkeiten",
-        "noFindings": "Keine Risiken erkannt. Dein Profil sieht gut aus!",
-        "zeroPoint": {
-            "found": "Null-Punkte-Halbjahr erkannt",
-            "detail": "{subjectName}: {semester} hat 0 Punkte — das gilt als automatische Disqualifikation."
-        },
-        "deficit": {
-            "overLimit": "Defizitgrenze überschritten",
-            "nearLimit": "Defizitanzahl nähert sich dem Limit",
-            "detail": "{count} Unterpunktung(en) von {max} erlaubten gefunden."
-        },
-        "anchor": {
-            "keystoneWeak": "Pflichtfach gefährdet",
-            "detail": "{subjectName} hat Einbringungspflicht, aber schwache Noten."
-        },
-        "pointsProjection": {
-            "belowMin": "Prognostizierte Punkte unter dem Minimum",
-            "detail": "Prognose: {projected} Punkte vs. {required} erforderlich."
-        },
-        "examRisk": {
-            "blockShort": "Prüfungsblock-Punkte unzureichend",
-            "detail": "Prüfungsblock-Prognose: {projected} / {required} Punkte."
-        },
-        "volatility": {
-            "declining": "Abnehmender Notentrend erkannt",
-            "detail": "{subjectName} zeigt einen rückläufigen Trend über die Halbjahre."
-        },
-        "tooltips": {
-            "einbringungspflicht": "Einbringungspflicht — Verpflichtung, die Noten dieses Fachs in die Abiturberechnung einzubringen. Kann nicht abgewählt werden.",
-            "unterpunktung": "Unterpunktung — eine Note unter 5 Punkten (von 15) zählt als Defizit.",
-            "leistungskurs": "Leistungskurs (LK) — erweiterter Kurs mit höherer Gewichtung.",
-            "grundkurs": "Grundkurs (GK) — Basiskurs mit Standardgewichtung."
-        }
-    },
-    "auth": {
-        "signInTitle": "Anmelden bei ARM",
-        "signUpTitle": "Konto erstellen",
-        "emailLabel": "E-Mail",
-        "passwordLabel": "Passwort",
-        "signInButton": "Anmelden",
-        "signUpButton": "Registrieren",
-        "switchAndSignUp": "Noch kein Konto? Registrieren",
-        "switchAndSignIn": "Bereits ein Konto? Anmelden",
-        "checkEmail": "Überprüfen Sie Ihre E-Mail für den Bestätigungslink!"
+    "features": {
+      "riskSensitivity": {
+        "title": "Risiko-Sensitivität",
+        "desc": "Echtzeit-Analyse der Defizitgrenzen.",
+        "badge": "KRITISCH"
+      },
+      "gpaProjection": {
+        "title": "Notenprognose",
+        "desc": "Prognostizieren Sie Ihre finale Abiturnote.",
+        "badge": "{grade} (Prognose)"
+      },
+      "trapDetection": {
+        "title": "Fallen-Erkennung",
+        "desc": "Automatische Warnungen bei Kursverstößen.",
+        "badge": "{count} Fallen gefunden"
+      }
     }
+  },
+  "configEngine": {
+    "title": "Konfigurationsmodul",
+    "description": "Wählen Sie Ihre akademische Region, um das korrekte Risikomodell zu initialisieren.",
+    "federalState": "Bundesland",
+    "graduationYear": "Abschlussjahr",
+    "startAnalysis": "Analyse starten",
+    "states": {
+      "nrw": "NRW",
+      "bavaria": "Bayern",
+      "general": "Allgemein"
+    }
+  },
+  "setup": {
+    "title": "Kurswahl & Noten",
+    "subtitle": "Füge deine Fächer hinzu, trage Halbjahresleistungen ein und markiere Prüfungsfächer.",
+    "backToHome": "Zurück zur Startseite",
+    "subjectsTitle": "Deine Fächer",
+    "subjectSingular": "Fach",
+    "subjectPlural": "Fächer",
+    "subjectLabel": "Fach",
+    "addSubject": "Fach hinzufügen",
+    "removeSubject": "Fach entfernen",
+    "subjectName": "Fachname",
+    "subjectNamePlaceholder": "z.B. Mathematik",
+    "subjectType": "Kurstyp",
+    "lkLabel": "Leistungskurs",
+    "gkLabel": "Grundkurs",
+    "mandatory": "Einbringungspflicht",
+    "examSubject": "Abiturprüfungsfach",
+    "examType": "Prüfungsart",
+    "examTypeNone": "Keine",
+    "examTypeWritten": "Schriftlich",
+    "examTypeOral": "Mündlich",
+    "examTypeColloquium": "Kolloquium",
+    "semesterGrades": "Halbjahresleistungen (0–15 Punkte)",
+    "finalExamGrade": "Abiturnote",
+    "confidence": "Zuversicht",
+    "confidenceLow": "Niedrig",
+    "confidenceHigh": "Hoch",
+    "stressFactors": "Stressfaktoren",
+    "rulesConfigTitle": "Eigene Regeln (Allgemeiner Modus)",
+    "rulesConfigDesc": "Definiere deine eigenen Bewertungsregeln, da kein Bundesland-Preset gilt.",
+    "lkWeight": "LK Gewichtung",
+    "gkWeight": "GK Gewichtung",
+    "deficitThreshold": "Unterpunktungsgrenze",
+    "maxDeficits": "Max. erlaubte Unterpunktungen",
+    "minTotalPoints": "Mindestpunktzahl gesamt",
+    "calculateRisk": "Risiko berechnen",
+    "cancel": "Abbrechen",
+    "configStatus": "Konfigurationsstatus",
+    "validationErrors": "Bitte behebe folgende Probleme:",
+    "validationSuccess": "Profil erfolgreich validiert! Bereit zur Risikoberechnung.",
+    "hintNRW": "NRW-Modus: Genau 2 LK-Fächer und 4 Prüfungsfächer erforderlich.",
+    "hintBavaria": "Bayern-Modus: Genau 2 LK-Fächer und 5 Prüfungsfächer erforderlich (3 schriftlich + 2 mündlich/Kolloquium).",
+    "hintGeneral": "Allgemeiner Modus: Keine Beschränkungen bei LK-/Prüfungsfächeranzahl. Konfiguriere deine eigenen Regeln unten.",
+    "semester": "Semester",
+    "examPoints": "Abiturprüfung"
+  },
+  "report": {
+    "title": "Risikobericht",
+    "dashboardTitle": "Abitur Status Dashboard",
+    "generalProfile": "Allgemeines Profil",
+    "profile": "Profil",
+    "setupIncomplete": "Setup unvollständig (0 Punkte akkumuliert)",
+    "pointsAccumulated": "{points} Punkte akkumuliert",
+    "recalculate": "Neu berechnen",
+    "criticalRisk": "KRITISCHES RISIKO",
+    "average": "Durchschnitt",
+    "actionRequired": "Aktion erforderlich: Profil-Setup",
+    "fixIssue": "Problem beheben",
+    "overallStatus": "Gesamtstatus",
+    "totalPoints": "Gesamtpunktzahl",
+    "deficits": "Unterpunktungen",
+    "zeroPoints": "Null-Punkte-Halbjahre",
+    "keystones": "Pflichtfächer",
+    "riskStatus": "Risikostand",
+    "backToSetup": "Zurück zur Eingabe",
+    "predictedGrade": "Prognostizierte Note",
+    "livesRemaining": "Leben Übrig",
+    "keystoneSubjects": "Pflichtfächer",
+    "psychosocialRisk": "Psychosoziales Risiko",
+    "noGradesYet": "Noch keine Noten",
+    "found": "Gefunden",
+    "ofActive": "von {total} Aktiv",
+    "noCriticalRisks": "Keine kritischen Risiken",
+    "avgRisk": "Ø Risiko",
+    "fragileCount": "{count} Fragil (Geringes Vertrauen)",
+    "unstableCount": "{count} Instabil (Angst)",
+    "safe": "Sicher",
+    "warning": "Warnung",
+    "danger": "Gefahr",
+    "red": "Kritisch",
+    "orange": "Warnung",
+    "green": "Sicher",
+    "hardStops": "Harte Sperren — Gesetzliche Disqualifikation",
+    "structuralRisks": "Strukturelle Risiken",
+    "optimizations": "Optimierungsmöglichkeiten",
+    "noFindings": "Keine Risiken erkannt. Dein Profil sieht gut aus!",
+    "zeroPoint": {
+      "found": "Null-Punkte-Halbjahr erkannt",
+      "detail": "{subjectName}: {semester} hat 0 Punkte — das gilt als automatische Disqualifikation."
+    },
+    "deficit": {
+      "overLimit": "Defizitgrenze überschritten",
+      "nearLimit": "Defizitanzahl nähert sich dem Limit",
+      "detail": "{count} Unterpunktung(en) von {max} erlaubten gefunden."
+    },
+    "anchor": {
+      "keystoneWeak": "Pflichtfach gefährdet",
+      "detail": "{subjectName} hat Einbringungspflicht, aber schwache Noten."
+    },
+    "pointsProjection": {
+      "belowMin": "Prognostizierte Punkte unter dem Minimum",
+      "detail": "Prognose: {projected} Punkte vs. {required} erforderlich."
+    },
+    "examRisk": {
+      "blockShort": "Prüfungsblock-Punkte unzureichend",
+      "detail": "Prüfungsblock-Prognose: {projected} / {required} Punkte."
+    },
+    "volatility": {
+      "declining": "Abnehmender Notentrend erkannt",
+      "detail": "{subjectName} zeigt einen rückläufigen Trend über die Halbjahre."
+    },
+    "tooltips": {
+      "einbringungspflicht": "Einbringungspflicht — Verpflichtung, die Noten dieses Fachs in die Abiturberechnung einzubringen. Kann nicht abgewählt werden.",
+      "unterpunktung": "Unterpunktung — eine Note unter 5 Punkten (von 15) zählt als Defizit.",
+      "leistungskurs": "Leistungskurs (LK) — erweiterter Kurs mit höherer Gewichtung.",
+      "grundkurs": "Grundkurs (GK) — Basiskurs mit Standardgewichtung."
+    },
+    "profileViolations": {
+      "nrw": {
+        "languageRequired": "Profil-Verstoß: Mindestens 1 aktive Sprache(n). Aktuell {actual} aktiv, benötigt {required}.",
+        "artMusicRequired": "NRW erfordert mindestens einen Kunst- oder Musikkurs in der Qualifikationsphase."
+      },
+      "bavaria": {
+        "languageRequired": "Profil-Verstoß: Mindestens 1 aktive Sprache(n). Aktuell {actual} aktiv, benötigt {required}.",
+        "scienceRequired": "Profil-Verstoß: Mindestens 1 aktive Naturwissenschaft(en). Aktuell {actual} aktiv, benötigt {required}.",
+        "mathRequired": "Profil-Verstoß: Mathematik erforderlich. Aktuell {actual} aktiv, benötigt {required}.",
+        "germanRequired": "Profil-Verstoß: Deutsch erforderlich. Aktuell {actual} aktiv, benötigt {required}."
+      },
+      "general": {
+        "languageRequired": "Profil-Verstoß: Mindestens {required} aktive Sprache(n). Aktuell {actual} aktiv, benötigt {required}.",
+        "scienceRequired": "Profil-Verstoß: Mindestens {required} aktive Naturwissenschaft(en). Aktuell {actual} aktiv, benötigt {required}.",
+        "linguisticLanguages": "Profil-Verstoß: Sprachliches Profil erfordert ≥{required} Sprachen. Aktuell {actual} aktiv, benötigt {required}.",
+        "scientificSciences": "Profil-Verstoß: Naturwissenschaftliches Profil erfordert ≥{required} Naturwissenschaften. Aktuell {actual} aktiv, benötigt {required}."
+      },
+      "keystoneWarning": "Profil-Verstoß: {subjectName} hat Belegpflicht, aber 0 Punkte in {semester} erhalten.",
+      "allClear": "Keine Profilverstöße erkannt."
+    },
+    "special2026": {
+      "nrw": {
+        "gapYearCritical": "KRITISCHES ÜBERGANGSRISIKO: Mit {totalDeficits} Unterpunktungen gesamt ({lkDeficits} in LK-Kursen) befindest du dich in der Gefahrenzone für die 'Lücken-Jahr'-Falle 2026. Eine Wiederholung an dieser Schule ist höchstwahrscheinlich UNMÖGLICH aufgrund des G8/G9-Übergangs. Ein Durchfallen kann einen Wechsel zu einem zentralisierten 'Bündelungsgymnasium' mit begrenzter Kapazität erzwingen. Ergreife sofortige Maßnahmen, um deine Noten zu sichern.",
+        "highDeficits": "Wiederholungsrisiko: Hoch ({totalDeficits} Unterpunktungen). Sei dir bewusst, dass die Wiederholung des Q2-Jahres 2026 strukturell schwierig ist. Du musst möglicherweise zu einem 'Bündelungsgymnasium' wechseln, da deine aktuelle Schule möglicherweise keine Q2-Wiederholungsklasse für G8-Schüler anbietet.",
+        "criticalTransition": "Kritischer Übergang: Da du wiederholen musst, überprüfe sofort, ob deine Schule eine 'G8-Wiederholer'-Klasse anbietet. Falls nicht, musst du dich an einem Bündelungsgymnasium anmelden."
+      },
+      "bavaria": {
+        "seminarOptimization": "Optimierungshinweis: '{subjectName}' (Ø {average} Pkt.) — Seminarpunkte sind ertragreich. Eine Verbesserung hier bringt mehr Wert als ein Standard-Grundkurs.",
+        "seminarHardAnchor": "Harter Anker-Alarm: '{subjectName}' (Ø {average} Pkt.) — Eine Unterpunktung in einem Seminar ist im neuen G9-System strukturell gefährlich. Behebe dies sofort mit höchster Priorität."
+      }
+    }
+  },
+  "pulse": {
+    "title": "Puls-Check",
+    "header": "Stress & Balance",
+    "currentRiskLevel": "Aktuelles Risikoniveau",
+    "theSqueeze": "Die Belastung",
+    "theSqueezeDesc": "Wöchentliche Verpflichtungen (Sport, Jobs, etc.)",
+    "recoveryDebt": "Erholungsdefizit",
+    "recoveryDebtDesc": "Biomarker für Burnout-Risiko",
+    "sleep": "Schlaf",
+    "energy": "Energie",
+    "expectationGap": "Erwartungslücke",
+    "expectationGapDesc": "Ziel vs. Prognostizierte Leistung",
+    "targetGPA": "Ziel-Note",
+    "projected": "Prognose",
+    "unrealisticPressure": "Unrealistisch / Hoher Druck",
+    "challengeZone": "Herausforderungszone",
+    "theNemesis": "Der Angstgegner",
+    "theNemesisDesc": "Welches Fach bereitet die meiste Sorge?",
+    "none": "Keines"
+  },
+  "auth": {
+    "signInTitle": "Anmelden bei ARM",
+    "signUpTitle": "Konto erstellen",
+    "emailLabel": "E-Mail",
+    "passwordLabel": "Passwort",
+    "signInButton": "Anmelden",
+    "signUpButton": "Registrieren",
+    "switchAndSignUp": "Noch kein Konto? Registrieren",
+    "switchAndSignIn": "Bereits ein Konto? Anmelden",
+    "checkEmail": "Überprüfen Sie Ihre E-Mail für den Bestätigungslink!"
+  }
 }

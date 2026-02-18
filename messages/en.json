@@ -1,131 +1,223 @@
 {
-    "landing": {
-        "title": "ABITUR RISK MONITOR",
-        "subtitle": "Strategic academic planning and risk mitigation for the Class of 2026.",
-        "cta": "Start Analysis",
-        "nav": {
-            "home": "Home",
-            "pricing": "Pricing",
-            "about": "About"
-        }
+  "landing": {
+    "title": "Secure Your Abitur.",
+    "titleHighlight": "Don't Leave Your Grades to Chance.",
+    "subtitle": "Instantly calculate your risk, find deficit traps, and plan your path to graduation. Built for the Class of 2026.",
+    "cta": "Check My Risk",
+    "updatedFor": "Updated for 2026 NRW Regulations",
+    "nav": {
+      "home": "Home",
+      "pricing": "Pricing",
+      "about": "About"
     },
-    "configEngine": {
-        "title": "Configuration Engine",
-        "federalState": "Federal State (Bundesland)",
-        "graduationYear": "Graduation Year",
-        "startAnalysis": "Start Analysis",
-        "states": {
-            "nrw": "NRW",
-            "bavaria": "Bavaria",
-            "general": "General"
-        }
-    },
-    "setup": {
-        "title": "Course Selection & Grades",
-        "subtitle": "Add your subjects, enter semester grades, and flag exam courses.",
-        "backToHome": "Back to Home",
-        "subjectsTitle": "Your Subjects",
-        "subjectSingular": "subject",
-        "subjectPlural": "subjects",
-        "subjectLabel": "Subject",
-        "addSubject": "Add Subject",
-        "removeSubject": "Remove Subject",
-        "subjectName": "Subject Name",
-        "subjectNamePlaceholder": "e.g. Mathematics",
-        "subjectType": "Course Type",
-        "lkLabel": "Intensive",
-        "gkLabel": "Standard",
-        "mandatory": "Mandatory (Einbringungspflicht)",
-        "examSubject": "Exam Subject (Abiturprüfung)",
-        "examType": "Exam Type",
-        "examTypeNone": "None",
-        "examTypeWritten": "Written",
-        "examTypeOral": "Oral",
-        "examTypeColloquium": "Colloquium",
-        "semesterGrades": "Semester Grades (0–15 points)",
-        "finalExamGrade": "Final Exam Grade",
-        "confidence": "Confidence",
-        "confidenceLow": "Low",
-        "confidenceHigh": "High",
-        "stressFactors": "Stress Factors",
-        "rulesConfigTitle": "Custom Rules (General Mode)",
-        "rulesConfigDesc": "Define your own grading rules since no federal-state preset applies.",
-        "lkWeight": "LK Weight Multiplier",
-        "gkWeight": "GK Weight Multiplier",
-        "deficitThreshold": "Deficit Threshold",
-        "maxDeficits": "Max Allowed Deficits",
-        "minTotalPoints": "Min Total Points",
-        "calculateRisk": "Calculate Risk",
-        "cancel": "Cancel",
-        "configStatus": "Configuration Status",
-        "validationErrors": "Please fix the following issues:",
-        "validationSuccess": "Profile validated successfully! Ready for risk calculation.",
-        "hintNRW": "NRW mode: Exactly 2 LK subjects and 4 exam subjects required.",
-        "hintBavaria": "Bavaria mode: Exactly 2 LK subjects and 5 exam subjects required (3 written + 2 oral/colloquium).",
-        "hintGeneral": "General mode: No restrictions on LK/exam count. Configure your custom rules below.",
-        "semester": "Semester",
-        "examPoints": "Exam Points"
-    },
-    "report": {
-        "title": "Risk Report",
-        "overallStatus": "Overall Status",
-        "totalPoints": "Total Points",
-        "deficits": "Deficits",
-        "zeroPoints": "Zero-Point Semesters",
-        "keystones": "Keystone Subjects",
-        "riskStatus": "Risk Status",
-        "backToSetup": "Back to Setup",
-        "safe": "Safe",
-        "warning": "Warning",
-        "danger": "Danger",
-        "red": "Critical",
-        "orange": "Warning",
-        "green": "Safe",
-        "hardStops": "Hard Stops — Legal Disqualifications",
-        "structuralRisks": "Structural Risks",
-        "optimizations": "Optimization Opportunities",
-        "noFindings": "No risk findings detected. Your profile looks clean!",
-        "zeroPoint": {
-            "found": "Zero-point semester detected",
-            "detail": "{subjectName}: {semester} has 0 points — this is an automatic disqualification."
-        },
-        "deficit": {
-            "overLimit": "Deficit limit exceeded",
-            "nearLimit": "Deficit count nearing the limit",
-            "detail": "{count} deficit(s) found out of {max} allowed."
-        },
-        "anchor": {
-            "keystoneWeak": "Keystone subject at risk",
-            "detail": "{subjectName} is legally required (Einbringungspflicht) but has weak grades."
-        },
-        "pointsProjection": {
-            "belowMin": "Projected points below minimum",
-            "detail": "Projected {projected} points vs. {required} required."
-        },
-        "examRisk": {
-            "blockShort": "Exam block points insufficient",
-            "detail": "Exam block projection: {projected} / {required} points."
-        },
-        "volatility": {
-            "declining": "Declining grade trend detected",
-            "detail": "{subjectName} shows a declining trend across semesters."
-        },
-        "tooltips": {
-            "einbringungspflicht": "Einbringungspflicht — mandatory obligation to include this subject's grades in the final Abitur calculation. Cannot be dropped.",
-            "unterpunktung": "Unterpunktung — a grade below 5 points (out of 15) counts as a deficit.",
-            "leistungskurs": "Leistungskurs (LK) — intensive/advanced course, weighted more heavily.",
-            "grundkurs": "Grundkurs (GK) — standard/basic course."
-        }
-    },
-    "auth": {
-        "signInTitle": "Sign in to ARM",
-        "signUpTitle": "Create Account",
-        "emailLabel": "Email",
-        "passwordLabel": "Password",
-        "signInButton": "Sign in",
-        "signUpButton": "Sign up",
-        "switchAndSignUp": "Don't have an account? Sign up",
-        "switchAndSignIn": "Already have an account? Sign in",
-        "checkEmail": "Check your email for confirmation link!"
+    "features": {
+      "riskSensitivity": {
+        "title": "Risk Sensitivity",
+        "desc": "Real-time analysis of deficit ceilings.",
+        "badge": "CRITICAL"
+      },
+      "gpaProjection": {
+        "title": "GPA Projection",
+        "desc": "Forecast your final Abitur grade.",
+        "badge": "{grade} (Proj.)"
+      },
+      "trapDetection": {
+        "title": "Trap Detection",
+        "desc": "Automatic alerts for course violations.",
+        "badge": "{count} Traps Found"
+      }
     }
+  },
+  "configEngine": {
+    "title": "Configuration Engine",
+    "description": "Select your academic region to initialize the correct risk model.",
+    "federalState": "Federal State (Bundesland)",
+    "graduationYear": "Graduation Year",
+    "startAnalysis": "Start Analysis",
+    "states": {
+      "nrw": "NRW",
+      "bavaria": "Bavaria",
+      "general": "General"
+    }
+  },
+  "setup": {
+    "title": "Course Selection & Grades",
+    "subtitle": "Add your subjects, enter semester grades, and flag exam courses.",
+    "backToHome": "Back to Home",
+    "subjectsTitle": "Your Subjects",
+    "subjectSingular": "subject",
+    "subjectPlural": "subjects",
+    "subjectLabel": "Subject",
+    "addSubject": "Add Subject",
+    "removeSubject": "Remove Subject",
+    "subjectName": "Subject Name",
+    "subjectNamePlaceholder": "e.g. Mathematics",
+    "subjectType": "Course Type",
+    "lkLabel": "Intensive",
+    "gkLabel": "Standard",
+    "mandatory": "Mandatory (Einbringungspflicht)",
+    "examSubject": "Exam Subject (Abiturprüfung)",
+    "examType": "Exam Type",
+    "examTypeNone": "None",
+    "examTypeWritten": "Written",
+    "examTypeOral": "Oral",
+    "examTypeColloquium": "Colloquium",
+    "semesterGrades": "Semester Grades (0–15 points)",
+    "finalExamGrade": "Final Exam Grade",
+    "confidence": "Confidence",
+    "confidenceLow": "Low",
+    "confidenceHigh": "High",
+    "stressFactors": "Stress Factors",
+    "rulesConfigTitle": "Custom Rules (General Mode)",
+    "rulesConfigDesc": "Define your own grading rules since no federal-state preset applies.",
+    "lkWeight": "LK Weight Multiplier",
+    "gkWeight": "GK Weight Multiplier",
+    "deficitThreshold": "Deficit Threshold",
+    "maxDeficits": "Max Allowed Deficits",
+    "minTotalPoints": "Min Total Points",
+    "calculateRisk": "Calculate Risk",
+    "cancel": "Cancel",
+    "configStatus": "Configuration Status",
+    "validationErrors": "Please fix the following issues:",
+    "validationSuccess": "Profile validated successfully! Ready for risk calculation.",
+    "hintNRW": "NRW mode: Exactly 2 LK subjects and 4 exam subjects required.",
+    "hintBavaria": "Bavaria mode: Exactly 2 LK subjects and 5 exam subjects required (3 written + 2 oral/colloquium).",
+    "hintGeneral": "General mode: No restrictions on LK/exam count. Configure your custom rules below.",
+    "semester": "Semester",
+    "examPoints": "Exam Points"
+  },
+  "report": {
+    "title": "Risk Report",
+    "dashboardTitle": "Abitur Status Dashboard",
+    "generalProfile": "General Profile",
+    "profile": "Profile",
+    "setupIncomplete": "Setup Incomplete (0 Points Accumulated)",
+    "pointsAccumulated": "{points} Points Accumulated",
+    "recalculate": "Recalculate",
+    "criticalRisk": "CRITICAL RISK",
+    "average": "Average",
+    "actionRequired": "Action Required: Profile Setup",
+    "fixIssue": "Fix Issue",
+    "overallStatus": "Overall Status",
+    "totalPoints": "Total Points",
+    "deficits": "Deficits",
+    "zeroPoints": "Zero-Point Semesters",
+    "keystones": "Keystone Subjects",
+    "riskStatus": "Risk Status",
+    "backToSetup": "Back to Setup",
+    "predictedGrade": "Predicted Grade",
+    "livesRemaining": "Lives Remaining",
+    "keystoneSubjects": "Keystone Subjects",
+    "psychosocialRisk": "Psychosocial Risk",
+    "noGradesYet": "No grades yet",
+    "found": "Found",
+    "ofActive": "of {total} Active",
+    "noCriticalRisks": "No Critical Risks",
+    "avgRisk": "Avg Risk",
+    "fragileCount": "{count} Fragile (Low Confidence)",
+    "unstableCount": "{count} Unstable (Anxiety)",
+    "safe": "Safe",
+    "warning": "Warning",
+    "danger": "Danger",
+    "red": "Critical",
+    "orange": "Warning",
+    "green": "Safe",
+    "hardStops": "Hard Stops — Legal Disqualifications",
+    "structuralRisks": "Structural Risks",
+    "optimizations": "Optimization Opportunities",
+    "noFindings": "No risk findings detected. Your profile looks clean!",
+    "zeroPoint": {
+      "found": "Zero-point semester detected",
+      "detail": "{subjectName}: {semester} has 0 points — this is an automatic disqualification."
+    },
+    "deficit": {
+      "overLimit": "Deficit limit exceeded",
+      "nearLimit": "Deficit count nearing the limit",
+      "detail": "{count} deficit(s) found out of {max} allowed."
+    },
+    "anchor": {
+      "keystoneWeak": "Keystone subject at risk",
+      "detail": "{subjectName} is legally required (Einbringungspflicht) but has weak grades."
+    },
+    "pointsProjection": {
+      "belowMin": "Projected points below minimum",
+      "detail": "Projected {projected} points vs. {required} required."
+    },
+    "examRisk": {
+      "blockShort": "Exam block points insufficient",
+      "detail": "Exam block projection: {projected} / {required} points."
+    },
+    "volatility": {
+      "declining": "Declining grade trend detected",
+      "detail": "{subjectName} shows a declining trend across semesters."
+    },
+    "tooltips": {
+      "einbringungspflicht": "Einbringungspflicht — mandatory obligation to include this subject's grades in the final Abitur calculation. Cannot be dropped.",
+      "unterpunktung": "Unterpunktung — a grade below 5 points (out of 15) counts as a deficit.",
+      "leistungskurs": "Leistungskurs (LK) — intensive/advanced course, weighted more heavily.",
+      "grundkurs": "Grundkurs (GK) — standard/basic course."
+    },
+    "profileViolations": {
+      "nrw": {
+        "languageRequired": "Profile Violation: At least 1 active language(s). Currently {actual} active, need {required}.",
+        "artMusicRequired": "NRW requires at least one art or music course (Kunst/Musik) in the qualification phase."
+      },
+      "bavaria": {
+        "languageRequired": "Profile Violation: At least 1 active language(s). Currently {actual} active, need {required}.",
+        "scienceRequired": "Profile Violation: At least 1 active science(s). Currently {actual} active, need {required}.",
+        "mathRequired": "Profile Violation: Mathematics required. Currently {actual} active, need {required}.",
+        "germanRequired": "Profile Violation: German required. Currently {actual} active, need {required}."
+      },
+      "general": {
+        "languageRequired": "Profile Violation: At least {required} active language(s). Currently {actual} active, need {required}.",
+        "scienceRequired": "Profile Violation: At least {required} active science(s). Currently {actual} active, need {required}.",
+        "linguisticLanguages": "Profile Violation: Linguistic profile requires ≥{required} languages. Currently {actual} active, need {required}.",
+        "scientificSciences": "Profile Violation: Scientific profile requires ≥{required} sciences. Currently {actual} active, need {required}."
+      },
+      "keystoneWarning": "Profile Violation: {subjectName} has Belegpflicht but received 0 points in {semester}.",
+      "allClear": "No profile violations detected."
+    },
+    "special2026": {
+      "nrw": {
+        "gapYearCritical": "CRITICAL TRANSITION RISK: With {totalDeficits} total deficits ({lkDeficits} in LK courses), you are in the danger zone for the 2026 'Gap Year' void. Repeating the year at this school is likely IMPOSSIBLE due to the G8/G9 transition. Failure may force a transfer to a centralized 'Bündelungsgymnasium' with limited capacity. Take immediate action to secure your grades.",
+        "highDeficits": "Repeat Risk: High ({totalDeficits} deficits). Be aware that repeating the Q2 year in 2026 is structurally difficult. You may have to change schools to a 'Bündelungsgymnasium' as your current school may not offer a Q2 repeat class for G8 students.",
+        "criticalTransition": "Critical Transition: Since you must repeat, verify immediately if your school offers a 'G8-Repeater' class. If not, you must register at a Bündelungsgymnasium."
+      },
+      "bavaria": {
+        "seminarOptimization": "Optimization Alert: '{subjectName}' (avg {average} pts) — Seminar points are high-yield. Improving this adds more value than a standard Grundkurs.",
+        "seminarHardAnchor": "Hard Anchor Alert: '{subjectName}' (avg {average} pts) — A deficit in a Seminar is structurally dangerous in the new G9 system. Prioritize fixing this immediately."
+      }
+    }
+  },
+  "pulse": {
+    "title": "Pulse Check",
+    "header": "Stress & Balance",
+    "currentRiskLevel": "Current Risk Level",
+    "theSqueeze": "The Squeeze",
+    "theSqueezeDesc": "Weekly Commitments (Sports, Jobs, etc.)",
+    "recoveryDebt": "Recovery Debt",
+    "recoveryDebtDesc": "Bio-markers for burnout risk",
+    "sleep": "Sleep",
+    "energy": "Energy",
+    "expectationGap": "Expectation Gap",
+    "expectationGapDesc": "Target vs. Projected Performance",
+    "targetGPA": "Target GPA",
+    "projected": "Projected",
+    "unrealisticPressure": "Unrealistic / High Pressure",
+    "challengeZone": "Challenge Zone",
+    "theNemesis": "The Nemesis",
+    "theNemesisDesc": "Which subject causes the most anxiety?",
+    "none": "None"
+  },
+  "auth": {
+    "signInTitle": "Sign in to ARM",
+    "signUpTitle": "Create Account",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "signInButton": "Sign in",
+    "signUpButton": "Sign up",
+    "switchAndSignUp": "Don't have an account? Sign up",
+    "switchAndSignIn": "Already have an account? Sign in",
+    "checkEmail": "Check your email for confirmation link!"
+  }
 }

@@ -13,12 +13,12 @@ export default function SetupPage({
     const locale = params.locale;
 
     return (
-        <main className="min-h-screen bg-slate-200 font-sans selection:bg-orange-200 selection:text-orange-900">
+        <main className="min-h-screen bg-slate-50/50 font-sans selection:bg-orange-200 selection:text-orange-900">
             {/* Header */}
-            <header className="w-full z-50 bg-white/70 backdrop-blur-md border-b border-white/20">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <header className="sticky top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex justify-between items-center">
                     <Link href={`/${locale}`} className="hover:opacity-80 transition-opacity">
-                        <Image src="/logo.svg" alt="Abitur Risk Management" width={200} height={50} className="h-12 w-auto" />
+                        <Image src="/logo.png" alt="Abitur Risk Management" width={2816} height={1536} className="h-24 w-auto" priority />
                     </Link>
 
                     <div className="flex items-center space-x-4">

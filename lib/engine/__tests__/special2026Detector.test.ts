@@ -182,8 +182,8 @@ describe('Special 2026 – NRW Bündelungsgymnasium Trap', () => {
         expect(result.trapType).toBe(TrapType.Special2026);
     });
 
-    it('should fire ORANGE for high deficits (≥6) in NRW 2026', () => {
-        // 6 deficit grades across two subjects → >= threshold
+    it('should fire RED for high deficits (≥6) in NRW 2026', () => {
+        // 6 deficit grades across two subjects → >= threshold → Gap Year Critical
         const subjects = [
             deficitSubject('Math', { Q1_1: 3, Q1_2: 4, Q2_1: 3, Q2_2: 4 }),
             deficitSubject('Bio', { Q1_1: 3, Q1_2: 4, Q2_1: 10, Q2_2: 10 }),
@@ -191,12 +191,12 @@ describe('Special 2026 – NRW Bündelungsgymnasium Trap', () => {
         const profile = nrwProfile(subjects, 2026);
         const result = special2026Detector.detect(profile, NRW_RULESET);
 
-        const orangeFindings = result.findings.filter(
-            (f) => f.severity === RiskSeverity.ORANGE
+        const redFindings = result.findings.filter(
+            (f) => f.severity === RiskSeverity.RED
         );
-        expect(orangeFindings).toHaveLength(1);
-        expect(orangeFindings[0].i18nKey).toBe('report.special2026.nrw.highDeficits');
-        expect(orangeFindings[0].message).toContain('Bündelungsgymnasium');
+        expect(redFindings).toHaveLength(1);
+        expect(redFindings[0].i18nKey).toBe('report.special2026.nrw.gapYearCritical');
+        expect(redFindings[0].message).toContain('Bündelungsgymnasium');
     });
 
     it('should fire RED for disqualified student in NRW 2026', () => {
@@ -214,6 +214,23 @@ describe('Special 2026 – NRW Bündelungsgymnasium Trap', () => {
         expect(redFindings).toHaveLength(1);
         expect(redFindings[0].i18nKey).toBe('report.special2026.nrw.criticalTransition');
         expect(redFindings[0].message).toContain('G8-Repeater');
+    });
+
+    it('should fire RED for 2+ LK deficits in NRW 2026', () => {
+        // 2 LK deficits (even with low total deficits) → RED Gap Year Critical
+        const subjects = [
+            { ...deficitSubject('Math LK', { Q1_1: 3, Q1_2: 4, Q2_1: 10, Q2_2: 10 }), type: SubjectType.LK },
+            { ...deficitSubject('Bio', { Q1_1: 10, Q1_2: 10, Q2_1: 10, Q2_2: 10 }), type: SubjectType.GK },
+        ];
+        const profile = nrwProfile(subjects, 2026);
+        const result = special2026Detector.detect(profile, NRW_RULESET);
+
+        const redFindings = result.findings.filter(
+            (f) => f.severity === RiskSeverity.RED
+        );
+        expect(redFindings).toHaveLength(1);
+        expect(redFindings[0].i18nKey).toBe('report.special2026.nrw.gapYearCritical');
+        expect(redFindings[0].message).toContain('LK courses');
     });
 
     it('should fire RED (not ORANGE) when disqualified with ≥6 deficits', () => {
@@ -451,7 +468,7 @@ describe('Special 2026 – Edge Cases', () => {
     });
 
     it('should handle NRW 2026 with exactly 6 deficits', () => {
-        // Exactly at threshold → fires
+        // Exactly at threshold → fires as RED (Gap Year Critical)
         const subjects = [
             deficitSubject('Math', { Q1_1: 3, Q1_2: 4, Q2_1: 3, Q2_2: 10 }),
             deficitSubject('Bio', { Q1_1: 3, Q1_2: 4, Q2_1: 3, Q2_2: 10 }),
@@ -460,7 +477,7 @@ describe('Special 2026 – Edge Cases', () => {
         const result = special2026Detector.detect(profile, NRW_RULESET);
 
         expect(result.findings).toHaveLength(1);
-        expect(result.findings[0].severity).toBe(RiskSeverity.ORANGE);
+        expect(result.findings[0].severity).toBe(RiskSeverity.RED);
     });
 
     it('should handle NRW 2026 with exactly 5 deficits (below threshold)', () => {

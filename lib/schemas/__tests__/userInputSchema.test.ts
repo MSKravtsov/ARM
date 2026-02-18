@@ -3,7 +3,7 @@
 // ──────────────────────────────────────────────────────────────
 
 import { UserInputProfileSchema } from '../userInputSchema';
-import { FederalState, SubjectType, ExamType } from '@/types/userInput';
+import { FederalState, SubjectType, ExamType, SubjectCategory } from '@/types/userInput';
 import type { Subject } from '@/types/userInput';
 
 // ─── Helpers ────────────────────────────────────────────────
@@ -17,6 +17,8 @@ function makeSubject(
         name: 'Mathematik',
         isMandatory: false,
         isBelegpflichtig: false,
+        subjectCategory: SubjectCategory.SOCIAL,
+        isActive: true,
         semesterGrades: { Q1_1: 10, Q1_2: 11, Q2_1: 9, Q2_2: 12 },
         finalExamGrade: null,
         confidence: 7,

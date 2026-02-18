@@ -1,0 +1,150 @@
+{
+    "landing": {
+        "title": "Secure Your Abitur.",
+        "titleHighlight": "Don't Leave Your Grades to Chance.",
+        "subtitle": "Instantly calculate your risk, find deficit traps, and plan your path to graduation. Built for the Class of 2026.",
+        "cta": "Check My Risk",
+        "updatedFor": "Updated for 2026 NRW Regulations",
+        "nav": {
+            "home": "Home",
+            "pricing": "Pricing",
+            "about": "About"
+        },
+        "features": {
+            "riskSensitivity": {
+                "title": "Risk Sensitivity",
+                "desc": "Real-time analysis of deficit ceilings.",
+                "badge": "CRITICAL"
+            },
+            "gpaProjection": {
+                "title": "GPA Projection",
+                "desc": "Forecast your final Abitur grade.",
+                "badge": "{grade} (Proj.)"
+            },
+            "trapDetection": {
+                "title": "Trap Detection",
+                "desc": "Automatic alerts for course violations.",
+                "badge": "{count} Traps Found"
+            }
+        }
+    },
+    "configEngine": {
+        "title": "Configuration Engine",
+        "federalState": "Federal State (Bundesland)",
+        "graduationYear": "Graduation Year",
+        "startAnalysis": "Start Analysis",
+        "states": {
+            "nrw": "NRW",
+            "bavaria": "Bavaria",
+            "general": "General"
+        }
+    },
+    "setup": {
+        "title": "Course Selection & Grades",
+        "subtitle": "Add your subjects, enter semester grades, and flag exam courses.",
+        "backToHome": "Back to Home",
+        "subjectsTitle": "Your Subjects",
+        "subjectSingular": "subject",
+        "subjectPlural": "subjects",
+        "subjectLabel": "Subject",
+        "addSubject": "Add Subject",
+        "removeSubject": "Remove Subject",
+        "subjectName": "Subject Name",
+        "subjectNamePlaceholder": "e.g. Mathematics",
+        "subjectType": "Course Type",
+        "lkLabel": "Intensive",
+        "gkLabel": "Standard",
+        "mandatory": "Mandatory (Einbringungspflicht)",
+        "examSubject": "Exam Subject (Abiturprüfung)",
+        "examType": "Exam Type",
+        "examTypeNone": "None",
+        "examTypeWritten": "Written",
+        "examTypeOral": "Oral",
+        "examTypeColloquium": "Colloquium",
+        "semesterGrades": "Semester Grades (0–15 points)",
+        "finalExamGrade": "Final Exam Grade",
+        "confidence": "Confidence",
+        "confidenceLow": "Low",
+        "confidenceHigh": "High",
+        "stressFactors": "Stress Factors",
+        "rulesConfigTitle": "Custom Rules (General Mode)",
+        "rulesConfigDesc": "Define your own grading rules since no federal-state preset applies.",
+        "lkWeight": "LK Weight Multiplier",
+        "gkWeight": "GK Weight Multiplier",
+        "deficitThreshold": "Deficit Threshold",
+        "maxDeficits": "Max Allowed Deficits",
+        "minTotalPoints": "Min Total Points",
+        "calculateRisk": "Calculate Risk",
+        "cancel": "Cancel",
+        "configStatus": "Configuration Status",
+        "validationErrors": "Please fix the following issues:",
+        "validationSuccess": "Profile validated successfully! Ready for risk calculation.",
+        "hintNRW": "NRW mode: Exactly 2 LK subjects and 4 exam subjects required.",
+        "hintBavaria": "Bavaria mode: Exactly 2 LK subjects and 5 exam subjects required (3 written + 2 oral/colloquium).",
+        "hintGeneral": "General mode: No restrictions on LK/exam count. Configure your custom rules below.",
+        "semester": "Semester",
+        "examPoints": "Exam Points"
+    },
+    "report": {
+        "title": "Risk Report",
+        "overallStatus": "Overall Status",
+        "totalPoints": "Total Points",
+        "deficits": "Deficits",
+        "zeroPoints": "Zero-Point Semesters",
+        "keystones": "Keystone Subjects",
+        "riskStatus": "Risk Status",
+        "backToSetup": "Back to Setup",
+        "safe": "Safe",
+        "warning": "Warning",
+        "danger": "Danger",
+        "red": "Critical",
+        "orange": "Warning",
+        "green": "Safe",
+        "hardStops": "Hard Stops — Legal Disqualifications",
+        "structuralRisks": "Structural Risks",
+        "optimizations": "Optimization Opportunities",
+        "noFindings": "No risk findings detected. Your profile looks clean!",
+        "zeroPoint": {
+            "found": "Zero-point semester detected",
+            "detail": "{subjectName}: {semester} has 0 points — this is an automatic disqualification."
+        },
+        "deficit": {
+            "overLimit": "Deficit limit exceeded",
+            "nearLimit": "Deficit count nearing the limit",
+            "detail": "{count} deficit(s) found out of {max} allowed."
+        },
+        "anchor": {
+            "keystoneWeak": "Keystone subject at risk",
+            "detail": "{subjectName} is legally required (Einbringungspflicht) but has weak grades."
+        },
+        "pointsProjection": {
+            "belowMin": "Projected points below minimum",
+            "detail": "Projected {projected} points vs. {required} required."
+        },
+        "examRisk": {
+            "blockShort": "Exam block points insufficient",
+            "detail": "Exam block projection: {projected} / {required} points."
+        },
+        "volatility": {
+            "declining": "Declining grade trend detected",
+            "detail": "{subjectName} shows a declining trend across semesters."
+        },
+        "tooltips": {
+            "einbringungspflicht": "Einbringungspflicht — mandatory obligation to include this subject's grades in the final Abitur calculation. Cannot be dropped.",
+            "unterpunktung": "Unterpunktung — a grade below 5 points (out of 15) counts as a deficit.",
+            "leistungskurs": "Leistungskurs (LK) — intensive/advanced course, weighted more heavily.",
+            "grundkurs": "Grundkurs (GK) — standard/basic course."
+        }
+    },
+    "auth": {
+        "signInTitle": "Sign in to ARM",
+        "signUpTitle": "Create Account",
+        "emailLabel": "Email",
+        "passwordLabel": "Password",
+        "signInButton": "Sign in",
+        "signUpButton": "Sign up",
+        "switchAndSignUp": "Don't have an account? Sign up",
+        "switchAndSignIn": "Already have an account? Sign in",
+        "checkEmail": "Check your email for confirmation link!"
+    }
+}

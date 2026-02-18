@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import SubjectCard from '@/components/setup/SubjectCard';
 import { UserInputProfileSchema } from '@/lib/schemas/userInputSchema';
+import { createClient } from '@/lib/supabase/client';
 import {
     FederalState,
     SubjectType,
@@ -69,6 +70,7 @@ export default function SetupForm({ federalState, locale }: SetupFormProps) {
     const t = useTranslations('setup');
     const tConfig = useTranslations('configEngine');
     const router = useRouter();
+    const supabase = createClient();
 
     const state = (Object.values(FederalState).includes(federalState as FederalState)
         ? federalState
@@ -81,7 +83,65 @@ export default function SetupForm({ federalState, locale }: SetupFormProps) {
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [globalErrors, setGlobalErrors] = useState<string[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+    const showToast = useCallback((type: 'success' | 'error', message: string) => {
+        setToast({ type, message });
+        setTimeout(() => setToast(null), 4000);
+    }, []);
+
+    // Load existing profile from localStorage on mount
+    useEffect(() => {
+        try {
+            const raw = localStorage.getItem('arm_profile');
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                const result = UserInputProfileSchema.safeParse(parsed);
+
+                if (result.success) {
+                    // Pre-populate form with existing data
+                    setSubjects(result.data.subjects);
+                    if (result.data.rulesConfig) {
+                        setRulesConfig(result.data.rulesConfig);
+                    }
+
+                    // If the saved federal state differs from current URL, update the URL
+                    if (result.data.federalState !== state) {
+                        router.replace(`/${locale}/setup?state=${result.data.federalState}`);
+                    }
+
+                    console.log('✅ Loaded existing profile from localStorage');
+                }
+            }
+        } catch (e) {
+            console.error('Failed to load existing profile:', e);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [state, router, locale]);
+
+    // Auto-save changes to localStorage (debounced)
+    useEffect(() => {
+        if (isLoading) return; // Don't save during initial load
+
+        const timeoutId = setTimeout(() => {
+            try {
+                const profile = {
+                    federalState: state,
+                    graduationYear: 2026 as const,
+                    subjects,
+                    ...(isGeneral ? { rulesConfig } : {}),
+                };
+                localStorage.setItem('arm_profile', JSON.stringify(profile));
+                console.log('💾 Auto-saved profile');
+            } catch (e) {
+                console.error('Failed to auto-save profile:', e);
+            }
+        }, 1000); // Debounce 1 second
+
+        return () => clearTimeout(timeoutId);
+    }, [subjects, rulesConfig, state, isGeneral, isLoading]);
 
     const addSubject = () => {
         setSubjects((prev) => [...prev, createBlankSubject()]);
@@ -100,7 +160,7 @@ export default function SetupForm({ federalState, locale }: SetupFormProps) {
         setRulesConfig((prev) => ({ ...prev, [field]: isNaN(num) ? 0 : num }));
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setIsSubmitting(true);
         setErrors({});
         setGlobalErrors([]);
@@ -133,21 +193,50 @@ export default function SetupForm({ federalState, locale }: SetupFormProps) {
             return;
         }
 
-        // Success — persist and navigate to report
         const validated = result.data;
+
+        // ── Auth check ──────────────────────────────────────────
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            showToast('error', 'You must be signed in to save your profile.');
+            setIsSubmitting(false);
+            return;
+        }
+
+        // ── Save to Supabase ────────────────────────────────────
+        const { error: dbError } = await supabase
+            .from('risk_profiles')
+            .upsert(
+                {
+                    user_id: user.id,
+                    federal_state: validated.federalState,
+                    graduation_year: validated.graduationYear,
+                    subjects: validated.subjects,
+                    rules_config: isGeneral ? validated.rulesConfig : null,
+                    updated_at: new Date().toISOString(),
+                },
+                { onConflict: 'user_id' }
+            );
+
+        if (dbError) {
+            showToast('error', `Save failed: ${dbError.message}`);
+            setIsSubmitting(false);
+            return;
+        }
+
+        // ── Persist locally + navigate ──────────────────────────
         try {
             localStorage.setItem('arm_profile', JSON.stringify(validated));
         } catch (e) {
-            console.error('Failed to save profile:', e);
+            console.error('Failed to save profile to localStorage:', e);
         }
-        setShowSuccess(true);
-        setIsSubmitting(false);
-        console.log('✅ Validated profile:', validated);
 
-        // Brief delay so user sees the success banner, then navigate
+        showToast('success', 'Profile saved! Generating your report…');
+        setIsSubmitting(false);
+
         setTimeout(() => {
             router.push(`/${locale}/report`);
-        }, 800);
+        }, 1200);
     };
 
     // State-specific hints
@@ -156,6 +245,18 @@ export default function SetupForm({ federalState, locale }: SetupFormProps) {
         [FederalState.Bavaria]: t('hintBavaria'),
         [FederalState.General]: t('hintGeneral'),
     };
+
+    // Show loading state while checking localStorage
+    if (isLoading) {
+        return (
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex items-center justify-center min-h-[50vh]">
+                <div className="text-center space-y-4">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500 mx-auto" />
+                    <p className="text-slate-500 text-sm">Loading your data...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -299,20 +400,6 @@ export default function SetupForm({ federalState, locale }: SetupFormProps) {
                 )}
             </AnimatePresence>
 
-            {/* Success Banner */}
-            <AnimatePresence>
-                {showSuccess && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="bg-green-50 border border-green-200 rounded-xl p-4"
-                    >
-                        <p className="text-sm font-semibold text-green-700">✅ {t('validationSuccess')}</p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
             {/* Submit */}
             <motion.div
                 initial={{ opacity: 0 }}
@@ -335,6 +422,35 @@ export default function SetupForm({ federalState, locale }: SetupFormProps) {
                     {t('calculateRisk')}
                 </Button>
             </motion.div>
+
+            {/* Toast Notification */}
+            <AnimatePresence>
+                {toast && (
+                    <motion.div
+                        key="toast"
+                        initial={{ opacity: 0, y: 24, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 24, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-2xl text-sm font-semibold whitespace-nowrap ${
+                            toast.type === 'success'
+                                ? 'bg-green-500 text-white shadow-green-500/30'
+                                : 'bg-red-500 text-white shadow-red-500/30'
+                        }`}
+                    >
+                        {toast.type === 'success' ? (
+                            <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                        ) : (
+                            <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        )}
+                        {toast.message}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

@@ -486,7 +486,7 @@ describe('Volatility Detector – General Mode (custom threshold)', () => {
             examSubject('Mathe', { Q1_1: 13, Q1_2: 7, Q2_1: 13, Q2_2: 7 }),
         ];
         const profile = generalProfile(subjects, { volatilityThreshold: 2.0 });
-        const ruleset = buildGeneralRuleset(profile.rulesConfig);
+        const ruleset = buildGeneralRuleset(profile.rulesConfig!);
         const result = volatilityDetector.detect(profile, ruleset);
 
         const volFindings = result.findings.filter(
@@ -501,7 +501,7 @@ describe('Volatility Detector – General Mode (custom threshold)', () => {
             examSubject('Mathe', { Q1_1: 13, Q1_2: 7, Q2_1: 13, Q2_2: 7 }),
         ];
         const profile = generalProfile(subjects, { volatilityThreshold: 5.0 });
-        const ruleset = buildGeneralRuleset(profile.rulesConfig);
+        const ruleset = buildGeneralRuleset(profile.rulesConfig!);
         const result = volatilityDetector.detect(profile, ruleset);
 
         const volFindings = result.findings.filter(

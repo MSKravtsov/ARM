@@ -5,11 +5,17 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
-import RiskDashboard from '@/components/report/RiskDashboard';
+import { motion } from 'framer-motion';
+
+import StatusHero from '@/components/report/dashboard/StatusHero';
+import MetricsGrid from '@/components/report/dashboard/MetricsGrid';
+import ActionCenter from '@/components/report/dashboard/ActionCenter';
+import PulseWidget from '@/components/report/PulseWidget';
+
+import { ReportProvider } from '@/lib/contexts/ReportContext';
 import { runRiskEngine } from '@/lib/engine/riskEngine';
 import type { RiskReport } from '@/types/riskEngine';
 import type { UserInputProfile } from '@/types/userInput';
-import { FederalState, SubjectType, ExamType } from '@/types/userInput';
 import { UserInputProfileSchema } from '@/lib/schemas/userInputSchema';
 
 /**
@@ -24,6 +30,7 @@ export default function ReportPage() {
     const locale = (params?.locale as string) ?? 'en';
     const t = useTranslations('report');
 
+    const [profile, setProfile] = useState<UserInputProfile | null>(null);
     const [report, setReport] = useState<RiskReport | null>(null);
     const [error, setError] = useState<string | null>(null);
 
@@ -45,6 +52,7 @@ export default function ReportPage() {
             }
 
             const riskReport = runRiskEngine(result.data);
+            setProfile(result.data);
             setReport(riskReport);
         } catch (e) {
             console.error('Error loading report:', e);
@@ -72,11 +80,12 @@ export default function ReportPage() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                         <Link href={`/${locale}`} className="hover:opacity-80 transition-opacity">
                             <Image
-                                src="/logo.svg"
+                                src="/logo.png"
                                 alt="Abitur Risk Management"
-                                width={200}
-                                height={50}
-                                className="h-12 w-auto"
+                                width={2816}
+                                height={1536}
+                                className="h-20 w-auto"
+                                priority
                             />
                         </Link>
                     </div>
@@ -97,46 +106,73 @@ export default function ReportPage() {
     }
 
     return (
-        <main className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50/30 to-slate-100">
-            {/* ── Header ── */}
-            <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-slate-200/60">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                    <Link href={`/${locale}`} className="hover:opacity-80 transition-opacity">
-                        <Image
-                            src="/logo.svg"
-                            alt="Abitur Risk Management"
-                            width={200}
-                            height={50}
-                            className="h-12 w-auto"
-                        />
-                    </Link>
-                    <div className="flex items-center gap-4">
-                        <Link
-                            href={`/${locale}/setup`}
-                            className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
-                        >
-                            {t('backToSetup')}
+        <ReportProvider profile={profile} report={report}>
+            <main className="min-h-screen bg-slate-50/50 pb-32">
+                {/* ── Global Header (Preserved) ── */}
+                <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60 transition-all">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                        <Link href={`/${locale}`} className="hover:opacity-80 transition-opacity">
+                            <Image
+                                src="/logo.png"
+                                alt="Abitur Risk Management"
+                                width={2816}
+                                height={1536}
+                                className="h-20 w-auto"
+                                priority
+                            />
                         </Link>
-                        <div className="flex items-center gap-1 text-xs font-medium text-slate-500 bg-white/60 px-3 py-1.5 rounded-full border border-slate-200/80">
-                            <Link href={`/en/report`} className={locale === 'en' ? 'text-slate-900' : ''}>EN</Link>
-                            <span className="text-slate-300">|</span>
-                            <Link href={`/de/report`} className={locale === 'de' ? 'text-slate-900' : ''}>DE</Link>
+                        <div className="flex items-center gap-4">
+                            <Link
+                                href={`/${locale}/setup`}
+                                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+                            >
+                                {t('backToSetup')}
+                            </Link>
+                            <div className="flex items-center gap-1 text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+                                <Link href={`/en/report`} className={`hover:text-slate-900 ${locale === 'en' ? 'text-slate-900 font-bold' : ''}`}>EN</Link>
+                                <span className="text-slate-300">|</span>
+                                <Link href={`/de/report`} className={`hover:text-slate-900 ${locale === 'de' ? 'text-slate-900 font-bold' : ''}`}>DE</Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </header>
+                </header>
 
-            {/* ── Dashboard Content ── */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-slate-900">{t('title')}</h1>
-                    <p className="text-sm text-slate-500 mt-1">
-                        {report!.federalState} · {t('overallStatus')}: {t(report!.overallSeverity.toLowerCase())}
-                    </p>
+                {/* ── New Dashboard Layout ── */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+                    {/* 1. Status Hero */}
+                    <SectionWrapper delay={0}>
+                        <StatusHero report={report!} />
+                    </SectionWrapper>
+
+                    {/* 2. Key Metrics Grid */}
+                    <SectionWrapper delay={0.1}>
+                        <MetricsGrid report={report!} />
+                    </SectionWrapper>
+
+                    {/* 3. Action Center (Hard Stops) */}
+                    <SectionWrapper delay={0.2}>
+                        <ActionCenter findings={report!.findings} />
+                    </SectionWrapper>
+
                 </div>
 
-                <RiskDashboard report={report!} />
-            </div>
-        </main>
+                {/* 4. Pulse Widget */}
+                <PulseWidget />
+            </main>
+        </ReportProvider>
+    );
+}
+
+// Helper wrapper for stagger animations
+function SectionWrapper({ children, delay }: { children: React.ReactNode, delay: number }) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay, ease: 'easeOut' }}
+        >
+            {children}
+        </motion.div>
     );
 }

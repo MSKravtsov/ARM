@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { SubjectType, ExamType, STRESS_FACTOR_OPTIONS } from '@/types/userInput';
 import type { Subject } from '@/types/userInput';
+import ConfidenceSlider from '@/components/ui/ConfidenceSlider';
 
 interface SubjectCardProps {
     subject: Subject;
@@ -181,18 +182,12 @@ export default function SubjectCard({ subject, index, errors, onChange, onRemove
                     <label className="block text-sm font-medium text-slate-600 mb-2">
                         {t('confidence')}: <span className="text-orange-500 font-bold">{subject.confidence}</span>/10
                     </label>
-                    <input
-                        type="range"
+                    <ConfidenceSlider
+                        value={subject.confidence}
+                        onChange={(value) => updateField('confidence', value)}
                         min={1}
                         max={10}
-                        value={subject.confidence}
-                        onChange={(e) => updateField('confidence', parseInt(e.target.value, 10))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
                     />
-                    <div className="flex justify-between text-xs text-slate-400 mt-1">
-                        <span>{t('confidenceLow')}</span>
-                        <span>{t('confidenceHigh')}</span>
-                    </div>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-slate-600 mb-2">{t('stressFactors')}</label>

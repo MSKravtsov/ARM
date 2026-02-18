@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import type { RiskFinding } from '@/types/riskEngine';
 
@@ -12,6 +13,8 @@ interface SuccessMetricProps {
  * Displays safe zones and optimization opportunities.
  */
 export default function SuccessMetric({ finding }: SuccessMetricProps) {
+    const t = useTranslations('report');
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -40,7 +43,11 @@ export default function SuccessMetric({ finding }: SuccessMetricProps) {
                 <p className="font-semibold text-emerald-800 text-sm">
                     {finding.trapType.replace(/([A-Z])/g, ' $1').trim()}
                 </p>
-                <p className="text-emerald-700 text-sm mt-0.5">{finding.message}</p>
+                <p className="text-emerald-700 text-sm mt-0.5">
+                    {finding.i18nKey
+                        ? t(finding.i18nKey.replace('report.', ''), finding.i18nParams || {})
+                        : finding.message}
+                </p>
             </div>
         </motion.div>
     );

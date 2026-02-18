@@ -305,7 +305,7 @@ describe('Profile Detector – STEP 2: Constraint Validation', () => {
                 socialSubject('Geschichte'),
             ];
             const profile = generalProfile(subjects, { minLanguages: 1 });
-            const ruleset = buildGeneralRuleset(profile.rulesConfig);
+            const ruleset = buildGeneralRuleset(profile.rulesConfig!);
             const result = profileDetector.detect(profile, ruleset);
 
             const langRed = result.findings.filter(
@@ -322,7 +322,7 @@ describe('Profile Detector – STEP 2: Constraint Validation', () => {
                 socialSubject('Geschichte'),
             ];
             const profile = generalProfile(subjects, { minSciences: 2 });
-            const ruleset = buildGeneralRuleset(profile.rulesConfig);
+            const ruleset = buildGeneralRuleset(profile.rulesConfig!);
             const result = profileDetector.detect(profile, ruleset);
 
             const sciRed = result.findings.filter(
@@ -342,7 +342,7 @@ describe('Profile Detector – STEP 2: Constraint Validation', () => {
                 profileType: ProfileType.LINGUISTIC,
                 minLanguages: 1,
             });
-            const ruleset = buildGeneralRuleset(profile.rulesConfig);
+            const ruleset = buildGeneralRuleset(profile.rulesConfig!);
             const result = profileDetector.detect(profile, ruleset);
 
             const lingRed = result.findings.filter(
@@ -362,7 +362,7 @@ describe('Profile Detector – STEP 2: Constraint Validation', () => {
                 profileType: ProfileType.SCIENTIFIC,
                 minSciences: 1,
             });
-            const ruleset = buildGeneralRuleset(profile.rulesConfig);
+            const ruleset = buildGeneralRuleset(profile.rulesConfig!);
             const result = profileDetector.detect(profile, ruleset);
 
             const sciRed = result.findings.filter(
@@ -385,7 +385,7 @@ describe('Profile Detector – STEP 2: Constraint Validation', () => {
                 minLanguages: 1,
                 minSciences: 2,
             });
-            const ruleset = buildGeneralRuleset(profile.rulesConfig);
+            const ruleset = buildGeneralRuleset(profile.rulesConfig!);
             const result = profileDetector.detect(profile, ruleset);
 
             const redFindings = result.findings.filter(
@@ -410,7 +410,7 @@ describe('Profile Detector – STEP 2: Constraint Validation', () => {
                 minSciences: 1,
                 profileType: ProfileType.SOCIAL,
             });
-            const ruleset = buildGeneralRuleset(profile.rulesConfig);
+            const ruleset = buildGeneralRuleset(profile.rulesConfig!);
             const result = profileDetector.detect(profile, ruleset);
 
             const langFindings = result.findings.filter(
@@ -437,11 +437,11 @@ describe('Profile Detector – STEP 3: Drop Simulation', () => {
             minSciences: 1,
             profileType: ProfileType.SOCIAL,
         });
-        const ruleset = buildGeneralRuleset(profile.rulesConfig);
+        const ruleset = buildGeneralRuleset(profile.rulesConfig!);
         const result = profileDetector.detect(profile, ruleset);
 
         const keystoneWarnings = result.findings.filter(
-            (f) => f.i18nKey === 'report.profile.keystoneWarning'
+            (f) => f.i18nKey === 'report.profileViolations.keystoneWarning'
         );
         // Both Englisch and Physik are keystones (each at exactly min)
         expect(keystoneWarnings).toHaveLength(2);
@@ -461,11 +461,11 @@ describe('Profile Detector – STEP 3: Drop Simulation', () => {
             minSciences: 1,
             profileType: ProfileType.SOCIAL,
         });
-        const ruleset = buildGeneralRuleset(profile.rulesConfig);
+        const ruleset = buildGeneralRuleset(profile.rulesConfig!);
         const result = profileDetector.detect(profile, ruleset);
 
         const keystoneWarnings = result.findings.filter(
-            (f) => f.i18nKey === 'report.profile.keystoneWarning'
+            (f) => f.i18nKey === 'report.profileViolations.keystoneWarning'
         );
         expect(keystoneWarnings).toHaveLength(0);
     });
@@ -481,7 +481,7 @@ describe('Profile Detector – STEP 3: Drop Simulation', () => {
             minSciences: 1,
             profileType: ProfileType.SOCIAL,
         });
-        const ruleset = buildGeneralRuleset(profile.rulesConfig);
+        const ruleset = buildGeneralRuleset(profile.rulesConfig!);
         const result = profileDetector.detect(profile, ruleset);
 
         const annotations = result.subjectAnnotations ?? [];
@@ -505,7 +505,7 @@ describe('Profile Detector – STEP 3: Drop Simulation', () => {
             minSciences: 1,
             profileType: ProfileType.SOCIAL,
         });
-        const ruleset = buildGeneralRuleset(profile.rulesConfig);
+        const ruleset = buildGeneralRuleset(profile.rulesConfig!);
         const result = profileDetector.detect(profile, ruleset);
 
         const redFindings = result.findings.filter(
@@ -515,7 +515,7 @@ describe('Profile Detector – STEP 3: Drop Simulation', () => {
 
         const keystoneForLang = result.findings.filter(
             (f) =>
-                f.i18nKey === 'report.profile.keystoneWarning' &&
+                f.i18nKey === 'report.profileViolations.keystoneWarning' &&
                 f.message.includes('language')
         );
         expect(keystoneForLang).toHaveLength(0);
@@ -562,7 +562,7 @@ describe('Profile Detector – Full Integration', () => {
 
         expect(result.findings).toHaveLength(1);
         expect(result.findings[0].severity).toBe(RiskSeverity.GREEN);
-        expect(result.findings[0].i18nKey).toBe('report.profile.allClear');
+        expect(result.findings[0].i18nKey).toBe('report.profileViolations.allClear');
     });
 
     it('should produce both RED and ORANGE findings simultaneously', () => {
@@ -575,7 +575,7 @@ describe('Profile Detector – Full Integration', () => {
             minSciences: 1,
             profileType: ProfileType.SOCIAL,
         });
-        const ruleset = buildGeneralRuleset(profile.rulesConfig);
+        const ruleset = buildGeneralRuleset(profile.rulesConfig!);
         const result = profileDetector.detect(profile, ruleset);
 
         const redFindings = result.findings.filter(
@@ -599,7 +599,7 @@ describe('Profile Detector – Full Integration', () => {
             minSciences: 1,
             profileType: ProfileType.SOCIAL,
         });
-        const ruleset = buildGeneralRuleset(profile.rulesConfig);
+        const ruleset = buildGeneralRuleset(profile.rulesConfig!);
         const result = profileDetector.detect(profile, ruleset);
 
         const redFindings = result.findings.filter(
@@ -619,7 +619,7 @@ describe('Profile Detector – Full Integration', () => {
             minSciences: 1,
             profileType: ProfileType.SOCIAL,
         });
-        const ruleset = buildGeneralRuleset(profile.rulesConfig);
+        const ruleset = buildGeneralRuleset(profile.rulesConfig!);
         const result = profileDetector.detect(profile, ruleset);
 
         const langRed = result.findings.filter(

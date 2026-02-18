@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import type { RiskFinding } from '@/types/riskEngine';
 
@@ -12,6 +13,8 @@ interface AlertBannerProps {
  * Displays a large, prominent alert for legal disqualifications / hard stops.
  */
 export default function AlertBanner({ finding }: AlertBannerProps) {
+    const t = useTranslations('report');
+
     return (
         <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -40,7 +43,11 @@ export default function AlertBanner({ finding }: AlertBannerProps) {
                 <p className="font-semibold text-red-800 text-sm uppercase tracking-wide mb-1">
                     {finding.trapType.replace(/([A-Z])/g, ' $1').trim()}
                 </p>
-                <p className="text-red-700 text-base">{finding.message}</p>
+                <p className="text-red-700 text-base">
+                    {finding.i18nKey
+                        ? t(finding.i18nKey.replace('report.', ''), finding.i18nParams || {})
+                        : finding.message}
+                </p>
                 {finding.affectedSubjectIds.length > 0 && (
                     <p className="text-red-500 text-xs mt-2">
                         Affected subjects: {finding.affectedSubjectIds.length}
