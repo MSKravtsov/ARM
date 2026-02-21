@@ -129,6 +129,17 @@ export default function LoginPage() {
                         fullWidth
                     />
 
+                    {mode === 'login' && (
+                        <div className="text-right -mt-2">
+                            <Link
+                                href={`/${locale}/auth/forgot-password`}
+                                className="text-xs text-slate-400 hover:text-orange-500 transition-colors"
+                            >
+                                Forgot password?
+                            </Link>
+                        </div>
+                    )}
+
                     {error && (
                         <p className="text-red-600 text-sm text-center bg-red-50 py-2 px-3 rounded-lg">
                             {error}

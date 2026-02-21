@@ -162,6 +162,17 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                                             fullWidth
                                         />
 
+                                            {mode === 'login' && (
+                                            <div className="text-right -mt-2">
+                                                <a
+                                                    href="/de/auth/forgot-password"
+                                                    className="text-xs text-slate-400 hover:text-orange-500 transition-colors"
+                                                >
+                                                    Forgot password?
+                                                </a>
+                                            </div>
+                                        )}
+
                                         {error && (
                                             <p className="text-red-600 text-sm bg-red-50 px-3 py-2 rounded-lg">
                                                 {error}
