@@ -6,8 +6,52 @@ import '../globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Abitur Risk Monitor',
-    description: 'Academic risk assessment platform for Class of 2026',
+    title: {
+        default: 'AbiturCheck – Abitur Risikoanalyse & Notenprognose',
+        template: '%s | AbiturCheck',
+    },
+    description:
+        'Berechne dein Abitur-Risiko kostenlos. AbiturCheck analysiert deine Fächerwahl, erkennt Notenrisiken und gibt dir eine klare Prognose für dein Abitur 2026.',
+    keywords: [
+        'Abitur',
+        'Abitur Rechner',
+        'Abiturnote berechnen',
+        'Abitur Risikoanalyse',
+        'Notenprognose',
+        'Abitur 2026',
+        'Abitur NRW',
+        'Abitur Bayern',
+        'Oberstufe',
+        'Abiturcheck',
+        'Fächerwahl Abitur',
+    ],
+    authors: [{ name: 'AbiturCheck' }],
+    metadataBase: new URL('https://abiturcheck.de'),
+    openGraph: {
+        title: 'AbiturCheck – Abitur Risikoanalyse & Notenprognose',
+        description:
+            'Berechne dein Abitur-Risiko kostenlos. Analyse deiner Fächerwahl, Notenrisiken erkennen und klare Prognose für dein Abitur 2026.',
+        url: 'https://abiturcheck.de',
+        siteName: 'AbiturCheck',
+        locale: 'de_DE',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'AbiturCheck – Abitur Risikoanalyse',
+        description:
+            'Berechne dein Abitur-Risiko kostenlos. Notenprognose & Risikoanalyse für Abitur 2026.',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+    alternates: {
+        languages: {
+            'de': '/de',
+            'en': '/en',
+        },
+    },
 };
 
 import { NextIntlClientProvider } from 'next-intl';

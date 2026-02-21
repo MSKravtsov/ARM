@@ -1,6 +1,13 @@
+import type { Metadata } from 'next';
 import SetupForm from '@/components/setup/SetupForm';
 import Link from 'next/link';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+    title: 'Fächer eingeben & Risiko berechnen',
+    description:
+        'Gib deine Abiturfächer und Noten ein. AbiturCheck berechnet sofort dein persönliches Risikoprofil und zeigt dir, wo du aufpassen musst.',
+};
 
 export default function SetupPage({
     params,
