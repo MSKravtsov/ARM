@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { createClient } from '@/lib/supabase/client';
 import { Input } from '@/components/ui/Input';
@@ -15,6 +16,8 @@ interface AuthModalProps {
 
 export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
     const supabase = createClient();
+    const params = useParams();
+    const locale = (params?.locale as string) ?? 'de';
     const overlayRef = useRef<HTMLDivElement>(null);
 
     const [mode, setMode] = useState<'login' | 'signup'>('login');
@@ -165,7 +168,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                                             {mode === 'login' && (
                                             <div className="text-right -mt-2">
                                                 <a
-                                                    href="/de/auth/forgot-password"
+                                                    href={`/${locale}/auth/forgot-password`}
                                                     className="text-xs text-slate-400 hover:text-orange-500 transition-colors"
                                                 >
                                                     Forgot password?
